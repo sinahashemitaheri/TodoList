@@ -1,25 +1,24 @@
-import logo from './logo.svg';
+import React, { useState } from "react"
+import NewTodo from "./Components/NewTodo/NewTodo"
+import TodoList from "./Components/TodoList/TodoList";
 import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Todo from "./Components/Todo";
+const App =()=>{
+const [todos,settodos]=useState([])
+const addertodo=(text)=>{
+  if(text.length)
+settodos([...todos,text])
 }
-
-export default App;
+const DeleteHandler=(id)=>{
+  const newdata=[...todos].filter((txt)=>txt!==id)
+  settodos(newdata)
+}
+  return(
+    <div>
+      <h3 style={{textAlign:"center", marginTop:"30px", color:"#fafaa"}}>برنامه ریزی روزانه</h3>
+        <NewTodo addTodo={addertodo}/> 
+        <TodoList todos={todos} Delete={DeleteHandler}/>
+    </div>
+  )
+}
+export default App
